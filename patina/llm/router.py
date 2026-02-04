@@ -1,7 +1,17 @@
 """LLM Router: LiteLLM integration with multi-provider fallback."""
 
 import os
+import warnings
 from typing import Optional, List, Dict, Any
+
+# Suppress harmless Pydantic serialization warnings from LiteLLM
+# These occur when LLM providers return slightly different response formats
+warnings.filterwarnings(
+    "ignore",
+    message=".*Pydantic serializer warnings.*",
+    category=UserWarning,
+    module="pydantic.*",
+)
 
 try:
     from litellm import Router

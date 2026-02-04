@@ -14,7 +14,17 @@ import asyncio
 import argparse
 import signal
 import sys
+import warnings
 from typing import Optional
+
+# Suppress harmless Pydantic serialization warnings from LiteLLM
+# These occur when LLM providers return slightly different response formats
+warnings.filterwarnings(
+    "ignore",
+    message=".*Pydantic serializer warnings.*",
+    category=UserWarning,
+    module="pydantic.*",
+)
 
 from patina.config import PatinaConfig
 from patina.agent.core import PatinaAgent
