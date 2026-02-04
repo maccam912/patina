@@ -24,7 +24,7 @@ from patina import PatinaAgent, PatinaConfig
 
 async def main():
     config = PatinaConfig(
-        database_url="postgresql://localhost/patina",
+        database_url="postgresql+asyncpg://localhost/patina",
         llm_api_key="your-api-key",
     )
     
